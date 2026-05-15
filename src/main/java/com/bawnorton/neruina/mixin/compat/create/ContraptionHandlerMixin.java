@@ -6,34 +6,29 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Coerce;
 
-@Mixin(targets = "com.simibubi.create.content.contraptions.ContraptionCollider", remap = false)
+@Mixin(targets = "com.simibubi.create.content.contraptions.ContraptionHandler", remap = false)
 @ConditionalMixin(modids = {"create"}, applyIfPresent = true)
 public abstract class ContraptionHandlerMixin {
 
 	@WrapOperation(
-		method = "collideEntities",
+		method = "tick",
 		at = @At(
 			value = "INVOKE",
-			target = "Lcom/simibubi/create/foundation/collision/ContinuousOBBCollider;collideMany(Lcom/simibubi/create/foundation/collision/CollisionList;Lcom/simibubi/create/foundation/collision/CollisionList;Lcom/simibubi/create/foundation/collision/OrientedBB;Lnet/minecraft/world/phys/Vec3;FZ)Lcom/simibubi/create/foundation/collision/ContinuousOBBCollider$CollisionResponse;",
+			target = "Lcom/simibubi/create/content/contraptions/ContraptionCollider;collideEntities(Lcom/simibubi/create/content/contraptions/AbstractContraptionEntity;)V",
 			remap = false
 		),
 		remap = false
 	)
-	private static Object catchContraptionCollide(
-		Object shapes,
-		Object entities,
-		Object entityBB,
-		Object deltaMovement,
-		float maxUpStep,
-		boolean hasVerticalRotation,
-		Operation<Object> original
+	private static void catchContraptionCollide(
+		@Coerce Object contraptionEntity,
+		Operation<Void> original
 	) {
 		try {
-			return original.call(shapes, entities, entityBB, deltaMovement, maxUpStep, hasVerticalRotation);
+			original.call(contraptionEntity);
 		} catch (Throwable e) {
 			Neruina.LOGGER.warn("Neruina caught an exception in Create contraption collision, skipping this tick", e);
-			return null;
 		}
 	}
 }
