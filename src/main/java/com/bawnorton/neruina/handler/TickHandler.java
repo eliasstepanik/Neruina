@@ -229,6 +229,15 @@ public final class TickHandler {
 		}
 	}
 
+	@SuppressWarnings("unused")
+	public void safelyTickContraption(Object contraptionEntity, Operation<Void> original) {
+		try {
+			original.call(contraptionEntity);
+		} catch (Throwable e) {
+			Neruina.LOGGER.warn("Neruina caught an exception in Create contraption collision, see below for cause", e);
+		}
+	}
+
 	private void checkBlacklistAndHandle(Entity entity, Throwable e) {
 		if (!Config.handleTickingEntities) {
 			throw TickingException.notHandled("handle_ticking_entities", e);
