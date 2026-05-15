@@ -32,8 +32,7 @@ public abstract class ContraptionHandlerMixin {
 		try {
 			return original.call(shapes, entities, entityBB, deltaMovement, maxUpStep, hasVerticalRotation);
 		} catch (Throwable e) {
-			Neruina.LOGGER.warn("Neruina caught an exception in Create contraption collision, see below for cause", e);
-			// Return null - the caller should handle this gracefully
+			Neruina.LOGGER.warn("Neruina caught an exception in Create contraption collision, skipping this tick", e);
 			return null;
 		}
 	}
