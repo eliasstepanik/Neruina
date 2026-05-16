@@ -26,7 +26,8 @@ public abstract class GameRendererMixin {
 		at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/client/renderer/GameRenderer;renderLevel(Lnet/minecraft/client/renderer/RenderBuffers;Lnet/minecraft/client/Camera;FJZLnet/minecraft/client/renderer/culling/Frustum;)V"
-		)
+		),
+		require = 0
 	)
 	private void catchRenderingException(GameRenderer instance, RenderBuffers renderBuffers, Camera camera, float partialTick, long finishTimeNano, boolean renderBlockOutline, Frustum frustum, Operation<Void> original) {
 		try {
