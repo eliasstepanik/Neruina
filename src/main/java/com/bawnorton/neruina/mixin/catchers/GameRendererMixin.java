@@ -18,9 +18,9 @@ public abstract class GameRendererMixin {
 	private static final long ERROR_WINDOW_MS = 10_000L;
 
 	@WrapMethod(method = "render", remap = false)
-	private void catchRenderingException(DeltaTracker deltaTracker, Operation<Void> original) {
+	private void catchRenderingException(DeltaTracker deltaTracker, boolean renderLevel, Operation<Void> original) {
 		try {
-			original.call(deltaTracker);
+			original.call(deltaTracker, renderLevel);
 		} catch (Exception e) {
 			long now = System.currentTimeMillis();
 			if (now - neruina$lastRenderErrorTime > ERROR_WINDOW_MS) {
