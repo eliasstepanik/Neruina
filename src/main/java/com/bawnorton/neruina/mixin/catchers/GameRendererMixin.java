@@ -7,47 +7,42 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.RenderBuffers;
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.culling.Frustum;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, priority = 900)
 @ModLoaderMixin(ModLoader.NEOFORGE)
 public abstract class GameRendererMixin {
-	private static long lastErrorTime = 0;
-	private static int errorCount = 0;
-	private static final long ERROR_COOLDOWN_MS = 10000; // 10 seconds
-	private static final int ERROR_THRESHOLD = 5;
+	private static int neruina$renderErrorCount = 0;
+	private static long neruina$lastRenderErrorTime = 0L;
+	private static final int MAX_ERRORS_BEFORE_ESCALATE = 5;
+	private static final long ERROR_WINDOW_MS = 10_000L;
 
 	@WrapOperation(
 		method = "renderLevel",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/client/renderer/LevelRenderer;renderLevel(Lcom/mojang/blaze3d/vertex/PoseStack;FJZLnet/minecraft/client/renderer/culling/Frustum;)V"
+			target = "Lnet/minecraft/client/renderer/LevelRenderer;renderLevel(Lnet/minecraft/client/renderer/RenderBuffers;Lnet/minecraft/client/Camera;FJZLnet/minecraft/client/renderer/culling/Frustum;)V"
 		)
 	)
-	private void catchRenderingException(LevelRenderer instance, Object poseStack, float partialTick, long finishTimeNano, boolean renderBlockOutline, Object frustum, Operation<Void> original) {
+	private void catchRenderingException(LevelRenderer instance, RenderBuffers renderBuffers, Camera camera, float partialTick, long finishTimeNano, boolean renderBlockOutline, Frustum frustum, Operation<Void> original) {
 		try {
-			original.call(instance, poseStack, partialTick, finishTimeNano, renderBlockOutline, frustum);
+			original.call(instance, renderBuffers, camera, partialTick, finishTimeNano, renderBlockOutline, frustum);
 		} catch (Exception e) {
-			handleRenderingException(e);
-		}
-	}
-
-	private static void handleRenderingException(Exception e) {
-		long currentTime = System.currentTimeMillis();
-		
-		// Reset error count if cooldown has passed
-		if (currentTime - lastErrorTime > ERROR_COOLDOWN_MS) {
-			errorCount = 0;
-		}
-		
-		errorCount++;
-		lastErrorTime = currentTime;
-		
-		if (errorCount > ERROR_THRESHOLD) {
-			Neruina.LOGGER.error("Neruina caught multiple rendering exceptions in a short period, see below for cause", e);
-		} else {
-			Neruina.LOGGER.warn("Neruina caught a rendering exception, see below for cause", e);
+			long now = System.currentTimeMillis();
+			if (now - neruina$lastRenderErrorTime > ERROR_WINDOW_MS) {
+				neruina$renderErrorCount = 0;
+			}
+			neruina$lastRenderErrorTime = now;
+			neruina$renderErrorCount++;
+			if (neruina$renderErrorCount == 1) {
+				Neruina.LOGGER.warn("Neruina caught a rendering exception in LevelRenderer.renderLevel, skipping frame", e);
+			} else if (neruina$renderErrorCount % MAX_ERRORS_BEFORE_ESCALATE == 0) {
+				Neruina.LOGGER.error("Neruina: rendering exception is recurring ({} times in {}s) — something is persistently broken. Last error:", neruina$renderErrorCount, ERROR_WINDOW_MS / 1000, e);
+			}
 		}
 	}
 }
