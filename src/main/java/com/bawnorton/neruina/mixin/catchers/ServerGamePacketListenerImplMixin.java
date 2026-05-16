@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class ServerGamePacketListenerImplMixin {
 	@WrapOperation(
 			//? if >=1.21.10 {
-			method = "tickPlayer",
-			//?} else {
-			/*method = "tick",
-			*///?}
+			/*method = "tickPlayer",
+			*///?} else {
+			method = "tick",
+			//?}
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/server/level/ServerPlayer;doTick()V"

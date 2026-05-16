@@ -2,7 +2,7 @@ package com.bawnorton.neruina.mixin.test;
 
 import com.bawnorton.neruina.util.annotation.DevOnly;
 //~ if >=26.1 'FarmBlock' -> 'FarmlandBlock'
-import net.minecraft.world.level.block.FarmlandBlock;
+import net.minecraft.world.level.block.FarmBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @DevOnly
 //~ if >=26.1 'FarmBlock' -> 'FarmlandBlock'
-@Mixin(FarmlandBlock.class)
+@Mixin(FarmBlock.class)
 public abstract class FarmBlockMixin {
 	@Inject(
 			method = "randomTick",

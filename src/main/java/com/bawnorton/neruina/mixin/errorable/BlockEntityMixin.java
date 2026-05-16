@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.UUID;
 
 //? if >=1.21.6 {
-import net.minecraft.world.level.storage.ValueInput;
+/*import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-//?}
+*///?}
 
 @Mixin(BlockEntity.class)
 abstract class BlockEntityMixin implements Errorable {
@@ -82,7 +82,7 @@ abstract class BlockEntityMixin implements Errorable {
 		}
 	}
 	*///?} elif <=1.21.5 {
-  /*@Inject(
+  @Inject(
 		  method = "saveAdditional",
 		  at = @At("HEAD")
   )
@@ -111,17 +111,17 @@ abstract class BlockEntityMixin implements Errorable {
 			}
     }
     //?} else {
-    /^neruina$errored = tag.getBooleanOr("neruina$errored", false);
+    /*neruina$errored = tag.getBooleanOr("neruina$errored", false);
 		try {
       neruina$tickingEntryId = tag.getString("neruina$tickingEntryId").map(UUID::fromString).orElse(null);
 		} catch (IllegalArgumentException e) {
 			neruina$tickingEntryId = null;
 			neruina$clearErrored();
 		}
-    ^///?}
+    *///?}
   }
-  *///?} else {
-	@Inject(
+  //?} else {
+	/*@Inject(
 			method = "saveAdditional",
 			at = @At("HEAD")
 	)
@@ -147,5 +147,5 @@ abstract class BlockEntityMixin implements Errorable {
 			neruina$clearErrored();
 		}
 	}
-	//?}
+	*///?}
 }

@@ -24,9 +24,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 
 //? if >=1.21.6 {
-import net.minecraft.world.level.storage.ValueInput;
+/*import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-//?}
+*///?}
 
 @Mixin(Entity.class)
 abstract class EntityMixin implements Errorable {
@@ -69,7 +69,7 @@ abstract class EntityMixin implements Errorable {
 	}
 
 	//? if <=1.21.5 {
-	/*@Inject(
+	@Inject(
 			method = "saveWithoutId",
 			at = @At(
 					value = "INVOKE",
@@ -94,7 +94,7 @@ abstract class EntityMixin implements Errorable {
 	)
 	private void loadAdditional(CompoundTag tag, CallbackInfo ci) {
 		//? if <=1.21.1 {
-    /^neruina$errored = tag.getBoolean("neruina$errored");
+    neruina$errored = tag.getBoolean("neruina$errored");
     if (tag.contains("neruina$tickingEntryId")) {
 			try {
         neruina$tickingEntryId = UUID.fromString(tag.getString("neruina$tickingEntryId"));
@@ -103,18 +103,18 @@ abstract class EntityMixin implements Errorable {
 				neruina$clearErrored();
 			}
     }
-    ^///?} else {
-		neruina$errored = tag.getBooleanOr("neruina$errored", false);
+    //?} else {
+		/*neruina$errored = tag.getBooleanOr("neruina$errored", false);
 		try {
 			neruina$tickingEntryId = tag.getString("neruina$tickingEntryId").map(UUID::fromString).orElse(null);
 		} catch (IllegalArgumentException e) {
 			neruina$tickingEntryId = null;
 			neruina$clearErrored();
 		}
-		//?}
+		*///?}
 	}
-	*///?} else {
-	@Inject(
+	//?} else {
+	/*@Inject(
 			method = "saveWithoutId",
 			at = @At(
 					value = "INVOKE",
@@ -146,7 +146,7 @@ abstract class EntityMixin implements Errorable {
 			neruina$clearErrored();
 		}
 	}
-	//?}
+	*///?}
 
 	@ModifyReturnValue(
 			method = {

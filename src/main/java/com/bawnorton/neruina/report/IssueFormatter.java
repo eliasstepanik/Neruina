@@ -33,10 +33,10 @@ public class IssueFormatter {
 			new Placeholder("modversion", false, Restriction.NONE, (config, entry) -> Platform.getModVersion(config.modid())),
 			new Placeholder("mcversion", false, Restriction.NONE, (config, entry) -> {
 				//? if <=1.21.5 {
-				/*return SharedConstants.getCurrentVersion().getName();
-				 *///?} else {
-				return SharedConstants.getCurrentVersion().name();
-				//?}
+				return SharedConstants.getCurrentVersion().getName();
+				 //?} else {
+				/*return SharedConstants.getCurrentVersion().name();
+				*///?}
 			}),
 			new Placeholder("report", false, Restriction.BODY, (config, entry) -> "```\n%s\n```".formatted(entry.createCrashReport()))
 	);

@@ -29,10 +29,10 @@ public abstract class InventoryMixin {
 	@Shadow
 	@Final
 	//? if <=1.21.1 {
-	/*public NonNullList<ItemStack> items;
-	 *///?} else {
-	private NonNullList<ItemStack> items;
-	//?}
+	public NonNullList<ItemStack> items;
+	 //?} else {
+	/*private NonNullList<ItemStack> items;
+	*///?}
 
 	//? if <=1.20.1 {
 	/*@WrapOperation(
@@ -53,7 +53,7 @@ public abstract class InventoryMixin {
 		Neruina.getInstance().getTickHandler().safelyTickItemStack(instance, level, entity, index, selected, original);
 	}
 	*///?} elif <=1.21.1 {
-  /*@WrapOperation(
+  @WrapOperation(
 	    method = "tick",
 	    at = @At(
 	        value = "INVOKE",
@@ -63,8 +63,8 @@ public abstract class InventoryMixin {
   private void catchTickingItemStack$notTheCauseOfTickLag(ItemStack instance, Level level, Entity entity, int i, boolean b, Operation<Void> original) {
       Neruina.getInstance().getTickHandler().safelyTickItemStack(instance, level, entity, i, b, original);
   }
-  *///?} else {
-	@WrapOperation(
+  //?} else {
+	/*@WrapOperation(
 			method = "tick",
 			at = @At(
 					value = "INVOKE",
@@ -74,7 +74,7 @@ public abstract class InventoryMixin {
 	private void catchTickingItemStack$notTheCauseOfTickLag(ItemStack instance, Level level, Entity entity, EquipmentSlot slot, Operation<Void> original, @Local(ordinal = 0) int slotIndex) {
 		Neruina.getInstance().getTickHandler().safelyTickItemStack(instance, level, entity, slot, slotIndex, original);
 	}
-	//?}
+	*///?}
 
 	@Inject(method = "load", at = @At("TAIL"))
 	private void removeErroredStatusOnInvInit(CallbackInfo ci) {
@@ -93,14 +93,14 @@ public abstract class InventoryMixin {
 			CompoundTag tag = data.copyTag();
 			//?}
 			//? if <=1.21.1 {
-      /*if (tag.getBoolean("neruina$errored")) {
+      if (tag.getBoolean("neruina$errored")) {
         Neruina.getInstance().getTickHandler().removeErrored(stack);
       }
-      *///?} else {
-			if (tag.getBoolean("neruina$errored").orElse(false)) {
+      //?} else {
+			/*if (tag.getBoolean("neruina$errored").orElse(false)) {
 				Neruina.getInstance().getTickHandler().removeErrored(stack);
 			}
-			//?}
+			*///?}
 		});
 	}
 }

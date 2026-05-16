@@ -19,10 +19,10 @@ import java.util.Map;
 import java.util.function.UnaryOperator;
 
 //? if >=1.21.11 {
-import net.minecraft.util.Util;
-//?} else {
-/*import net.minecraft.Util;
- *///?}
+/*import net.minecraft.util.Util;
+*///?} else {
+import net.minecraft.Util;
+ //?}
 
 public interface Texter {
 	Component LINE_BREAK = literal("\n");
@@ -108,9 +108,9 @@ public interface Texter {
 
 	static ClickEvent clickEvent(ClickEvent.Action action, String value) {
 		//? if <=1.21.1 {
-		/*return new ClickEvent(action, value);
-		 *///?} else {
-		return switch (action) {
+		return new ClickEvent(action, value);
+		 //?} else {
+		/*return switch (action) {
 			case OPEN_URL -> new ClickEvent.OpenUrl(URI.create(value));
 			case OPEN_FILE -> new ClickEvent.OpenFile(value);
 			case RUN_COMMAND -> new ClickEvent.RunCommand(value);
@@ -119,20 +119,20 @@ public interface Texter {
 			case CHANGE_PAGE -> new ClickEvent.ChangePage(Integer.parseInt(value));
 			default -> null;
 		};
-		//?}
+		*///?}
 	}
 
 	//? if <=1.21.1 {
-    /*static <T> HoverEvent hoverEvent(HoverEvent.Action<T> action, T value) {
+    static <T> HoverEvent hoverEvent(HoverEvent.Action<T> action, T value) {
         return new HoverEvent(action, value);
     }
-    *///?} else {
-	static HoverEvent hoverEvent(HoverEvent.Action action, Object value) {
+    //?} else {
+	/*static HoverEvent hoverEvent(HoverEvent.Action action, Object value) {
 		return switch (action) {
 			case SHOW_TEXT -> new HoverEvent.ShowText((Component) value);
 			case SHOW_ENTITY -> new HoverEvent.ShowEntity((HoverEvent.EntityTooltipInfo) value);
             default -> throw new IllegalArgumentException("Unsupported hover event action: " + action);
         };
 	}
-	//?}
+	*///?}
 }

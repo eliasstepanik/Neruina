@@ -1,5 +1,5 @@
 //? if <= 1.21.1 {
-/*package com.bawnorton.neruina.mixin.compat.itshallnottick;
+package com.bawnorton.neruina.mixin.compat.itshallnottick;
 
 import com.bawnorton.neruina.Neruina;
 import com.bawnorton.neruina.util.annotation.ConditionalMixin;
@@ -40,4 +40,4 @@ public abstract class LevelMixin {
 		Neruina.getInstance().getTickHandler().safelyTickEntities(consumer, entity, world, random, original);
 	}
 }
-*///?}
+//?}

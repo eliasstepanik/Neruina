@@ -26,10 +26,10 @@ public final class ClientTickHandler {
 			*///?}
 			client.setScreen(new TitleScreen());
 			//? if <=1.21.1 {
-			/*client.getToasts()
-			 *///?} else {
-			client.getToastManager()
-			//?}
+			client.getToasts()
+			 //?} else {
+			/*client.getToastManager()
+			*///?}
 					.addToast(SystemToast.multiline(
 							client,
 							//? if >1.20.1 {

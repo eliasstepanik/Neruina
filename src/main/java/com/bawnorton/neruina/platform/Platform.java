@@ -3,7 +3,7 @@ package com.bawnorton.neruina.platform;
 
 //? if fabric {
 
-import java.nio.file.Path;
+/*import java.nio.file.Path;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -63,8 +63,8 @@ public final class Platform {
 		return FabricLoader.getInstance().isDevelopmentEnvironment();
 	}
 }
-//?} elif neoforge {
-/*import java.util.List;
+*///?} elif neoforge {
+import java.util.List;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
@@ -83,7 +83,7 @@ public final class Platform {
 	}
 
 	//? if >=1.21.10 {
-	/^public static boolean isModLoaded(String modid) {
+	/*public static boolean isModLoaded(String modid) {
 		List<ModInfo> mods = FMLLoader.getCurrent().getLoadingModList().getMods();
 		for (ModInfo mod : mods) {
 			if (mod.getModId().equals(modid)) {
@@ -124,7 +124,7 @@ public final class Platform {
 	public static boolean isDev() {
 		return !FMLLoader.getCurrent().isProduction();
 	}
-	^///?} else {
+	*///?} else {
 	public static boolean isModLoaded(String modid) {
 		List<ModInfo> mods = LoadingModList.get().getMods();
 		for (ModInfo mod : mods) {
@@ -168,7 +168,7 @@ public final class Platform {
 	}
 	//?}
 }
-*///?} elif forge {
+//?} elif forge {
 
 /*import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;

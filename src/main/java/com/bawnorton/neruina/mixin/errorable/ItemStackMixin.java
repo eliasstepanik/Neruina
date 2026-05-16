@@ -115,7 +115,7 @@ abstract class ItemStackMixin implements Errorable {
 
 	@Inject(
 			//~ if >=26.1 'Lnet/minecraft/world/level/ItemLike' -> 'Lnet/minecraft/core/Holder'
-			method = "<init>(Lnet/minecraft/core/Holder;ILnet/minecraft/core/component/PatchedDataComponentMap;)V",
+			method = "<init>(Lnet/minecraft/world/level/ItemLike;ILnet/minecraft/core/component/PatchedDataComponentMap;)V",
 			at = @At("TAIL")
 	)
 	private void readErroredFromComponents(CallbackInfo ci) {
@@ -124,14 +124,14 @@ abstract class ItemStackMixin implements Errorable {
 
 		CompoundTag tag = data.copyTag();
 		//? if <=1.21.1 {
-    /*neruina$errored = tag.getBoolean("neruina$errored");
+    neruina$errored = tag.getBoolean("neruina$errored");
     if (tag.contains("neruina$tickingEntryId")) {
       neruina$tickingEntryId = tag.getUUID("neruina$tickingEntryId");
     }
-    *///?} else {
-		neruina$errored = tag.getBooleanOr("neruina$errored", false);
+    //?} else {
+		/*neruina$errored = tag.getBooleanOr("neruina$errored", false);
 		neruina$tickingEntryId = tag.getString("neruina$tickingEntryId").map(UUID::fromString).orElse(null);
-		//?}
+		*///?}
 	}
 	//?}
 }

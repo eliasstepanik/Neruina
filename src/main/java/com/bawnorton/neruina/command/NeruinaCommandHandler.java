@@ -329,10 +329,10 @@ public final class NeruinaCommandHandler {
 			}
 			Player player = context.getSource().getPlayerOrException();
 			//? if >=1.21.10 {
-			if (!player.getGameProfile().id().equals(UUID.fromString("17c06cab-bf05-4ade-a8d6-ed14aaf70545"))) {
-				//?} else {
-				/*if(!player.getGameProfile().getId().equals(UUID.fromString("17c06cab-bf05-4ade-a8d6-ed14aaf70545"))) {
-				 *///?}
+			/*if (!player.getGameProfile().id().equals(UUID.fromString("17c06cab-bf05-4ade-a8d6-ed14aaf70545"))) {
+				*///?} else {
+				if(!player.getGameProfile().getId().equals(UUID.fromString("17c06cab-bf05-4ade-a8d6-ed14aaf70545"))) {
+				 //?}
 				return 0;
 			}
 			Neruina.getInstance().getAutoReportHandler().testReporting(context.getSource().getPlayerOrException());

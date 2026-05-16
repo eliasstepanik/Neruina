@@ -69,10 +69,10 @@ public final class MessageHandler {
 				actions != null ? Texter.concatDelimited(Texter.LINE_BREAK, actions) : null
 		);
 		//? if >=26.1 {
-		player.sendSystemMessage(pad ? Texter.pad(message) : message);
-		//?} else {
-		/*player.displayClientMessage(pad ? Texter.pad(message) : message, false);
-		*///?}
+		/*player.sendSystemMessage(pad ? Texter.pad(message) : message);
+		*///?} else {
+		player.displayClientMessage(pad ? Texter.pad(message) : message, false);
+		//?}
 	}
 
 	public Component generateEntityActions(Player forPlayer, Entity entity) {
@@ -133,10 +133,10 @@ public final class MessageHandler {
 				ChatFormatting.DARK_AQUA,
 				"/execute in %s run tp @s %s".formatted(
 						//? if >=1.21.11 {
-						dimension.identifier().toString(),
-						//?} else {
-						/*dimension.location().toString(),
-						*///?}
+						/*dimension.identifier().toString(),
+						*///?} else {
+						dimension.location().toString(),
+						//?}
 						posAsNums(pos)
 				)
 		);

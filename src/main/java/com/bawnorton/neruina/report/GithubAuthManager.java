@@ -48,10 +48,10 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 //? if >=1.21.11 {
-import net.minecraft.util.Util;
-//?} else {
-/*import net.minecraft.Util;
- *///?}
+/*import net.minecraft.util.Util;
+*///?} else {
+import net.minecraft.Util;
+ //?}
 
 public final class GithubAuthManager {
 	private static final String CLIENT_ID = "1907e7c3f988a98face9";
@@ -142,10 +142,10 @@ public final class GithubAuthManager {
 
 	private static String getAuthorisationCode(LoginRecord record) throws IOException, AbortedException {
 		//? if forge || neoforge && <=1.21.1 {
-		/*String state = RandomStringUtils.randomAlphabetic(8);
-		*///?} else {
-		String state = RandomStringUtils.secure().nextAlphabetic(8);
-		//?}
+		String state = RandomStringUtils.randomAlphabetic(8);
+		//?} else {
+		/*String state = RandomStringUtils.secure().nextAlphabetic(8);
+		*///?}
 		HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
 		AtomicReference<String> code = new AtomicReference<>();

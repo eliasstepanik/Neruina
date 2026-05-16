@@ -7,10 +7,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if >=1.21.11 {
-import net.minecraft.world.entity.monster.zombie.Zombie;
-//?} else {
-/*import net.minecraft.world.entity.monster.Zombie;
-*///?}
+/*import net.minecraft.world.entity.monster.zombie.Zombie;
+*///?} else {
+import net.minecraft.world.entity.monster.Zombie;
+//?}
 
 @DevOnly
 @Mixin(Zombie.class)

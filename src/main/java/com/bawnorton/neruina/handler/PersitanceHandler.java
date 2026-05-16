@@ -10,13 +10,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 
 //~ if >=26.1 'DimensionDataStorage' -> 'SavedDataStorage'
-import net.minecraft.world.level.storage.SavedDataStorage;
+import net.minecraft.world.level.storage.DimensionDataStorage;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 import org.jetbrains.annotations.NotNull;
 
 //? if >=1.21.5
-import net.minecraft.world.level.saveddata.SavedDataType;
+//import net.minecraft.world.level.saveddata.SavedDataType;
 
 public final class PersitanceHandler extends SavedData {
 	private static final Codec<PersitanceHandler> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -39,20 +39,20 @@ public final class PersitanceHandler extends SavedData {
 	));
 
 	//? if >1.21.1 {
-	private static final SavedDataType<PersitanceHandler> type = new SavedDataType<>(
+	/*private static final SavedDataType<PersitanceHandler> type = new SavedDataType<>(
 			//$ if >=26.1 'ResourceLocation.fromNamespaceAndPath(Neruina.MOD_ID, "persistance"),' else 'Neruina.MOD_ID,'
-			Identifier.fromNamespaceAndPath(Neruina.MOD_ID, "persistance"),
+			Neruina.MOD_ID,
 			PersitanceHandler::new,
 			CODEC,
 			null
 	);
-	//?} elif >1.20.1 {
-  /*private static final SavedData.Factory<PersitanceHandler> type = new SavedData.Factory<>(
+	*///?} elif >1.20.1 {
+  private static final SavedData.Factory<PersitanceHandler> type = new SavedData.Factory<>(
 		  PersitanceHandler::new,
 		  (compoundTag, provider) -> load(compoundTag),
 		  null
   );
-  *///?}
+  //?}
 
 	private static ServerLevel level;
 
@@ -63,7 +63,7 @@ public final class PersitanceHandler extends SavedData {
 			return;
 		}
 		//~ if >=26.1 'DimensionDataStorage' -> 'SavedDataStorage'
-		SavedDataStorage dataStorage = level.getDataStorage();
+		DimensionDataStorage dataStorage = level.getDataStorage();
 		//? if <=1.20.1 {
 		/*PersitanceHandler handler = dataStorage.computeIfAbsent(
 				PersitanceHandler::load,
@@ -71,10 +71,10 @@ public final class PersitanceHandler extends SavedData {
 				Neruina.MOD_ID
 		);
 		*///?} elif <=1.21.1 {
-		/*PersitanceHandler handler = dataStorage.computeIfAbsent(type, Neruina.MOD_ID);
-		 *///?} else {
-		PersitanceHandler handler = dataStorage.computeIfAbsent(type);
-		 //?}
+		PersitanceHandler handler = dataStorage.computeIfAbsent(type, Neruina.MOD_ID);
+		 //?} else {
+		/*PersitanceHandler handler = dataStorage.computeIfAbsent(type);
+		 *///?}
 		handler.setDirty();
 	}
 
