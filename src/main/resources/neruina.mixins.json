@@ -9,6 +9,7 @@
   },
   "mixins": [
     "accessor.LevelChunkAccessor",
+    "catchers.GameRendererMixin",
     "catchers.InventoryMixin",
     "catchers.LevelChunkMixin",
     "catchers.LevelChunkMixin$BoundTickingBlockEntityMixin",
