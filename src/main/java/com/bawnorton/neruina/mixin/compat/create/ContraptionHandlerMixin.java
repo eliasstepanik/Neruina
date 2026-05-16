@@ -1,3 +1,5 @@
+//? if >1.21.1 {
+/*
 package com.bawnorton.neruina.mixin.compat.create;
 
 import com.bawnorton.neruina.Neruina;
@@ -8,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 
-@Mixin(targets = "com.simibubi.create.content.contraptions.ContraptionHandler", remap = false)
+@Mixin(targets = "com.simibubi.create.content.contraptions.ContraptionHandler", remap = false, priority = 999)
 @ConditionalMixin(modids = {"create"}, applyIfPresent = true)
 public abstract class ContraptionHandlerMixin {
 
@@ -32,3 +34,7 @@ public abstract class ContraptionHandlerMixin {
 		}
 	}
 }
+*/
+//?} else {
+// Disabled for 1.21.1-neoforge
+//?}

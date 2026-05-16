@@ -76,6 +76,7 @@ public abstract class InventoryMixin {
 	}
 	*///?}
 
+	//? if <=1.21.1 {
 	@Inject(method = "load", at = @At("TAIL"))
 	private void removeErroredStatusOnInvInit(CallbackInfo ci) {
 		items.forEach(stack -> {
@@ -103,4 +104,5 @@ public abstract class InventoryMixin {
 			*///?}
 		});
 	}
+	//?}
 }
