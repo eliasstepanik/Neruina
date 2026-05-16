@@ -28,24 +28,29 @@ sc.properties.tags(minecraft)
 base.archivesName = "${mod("id")}-${mod("version")}+$minecraft-$loader"
 
 dependencies {
-    deps("kohsuke_github") {
-        jarJar(implementation("org.kohsuke:github-api:$it") {
-            exclude("commons-io", "commons-io")
-            exclude("org.apache.commons", "commons-lang3")
-            exclude("com.fasterxml.jackson.core", "jackson-databind")
-            exclude("com.fasterxml.jackson.core", "jackson-annotations")
-            exclude("com.fasterxml.jackson.core", "jackson-core")
-        })
-    }
-    deps("http_core") {
-        jarJar(implementation("org.apache.httpcomponents:httpcore:$it")!!)
-    }
-    deps("http_client") {
-        jarJar(implementation("org.apache.httpcomponents:httpclient:$it")!!)
-    }
-    deps("configurable") {
-        implementation(annotationProcessor("com.bawnorton.configurable:configurable-$loader:$it")!!)
-    }
+	deps("kohsuke_github") {
+		jarJar(implementation("org.kohsuke:github-api:$it") {
+			exclude("commons-io", "commons-io")
+			exclude("org.apache.commons", "commons-lang3")
+			exclude("com.fasterxml.jackson.core", "jackson-databind")
+			exclude("com.fasterxml.jackson.core", "jackson-annotations")
+			exclude("com.fasterxml.jackson.core", "jackson-core")
+		})
+	}
+	deps("http_core") {
+		jarJar(implementation("org.apache.httpcomponents:httpcore:$it")!!)
+	}
+	deps("http_client") {
+		jarJar(implementation("org.apache.httpcomponents:httpclient:$it")!!)
+	}
+	deps("configurable") {
+		implementation(annotationProcessor("com.bawnorton.configurable:configurable-$loader:$it")!!)
+	}
+
+	implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3")!!)
+	jarJar(implementation("io.github.llamalad7:mixinextras-neoforge:0.5.3")!!)
+
+	annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 }
 
 java {
