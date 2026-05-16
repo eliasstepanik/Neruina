@@ -5,6 +5,7 @@ import com.bawnorton.neruina.util.annotation.ModLoaderMixin;
 import com.bawnorton.neruina.platform.ModLoader;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -17,9 +18,9 @@ public abstract class GameRendererMixin {
 	private static final long ERROR_WINDOW_MS = 10_000L;
 
 	@WrapMethod(method = "renderLevel", remap = false)
-	private void catchRenderingException(Operation<Void> original) {
+	private void catchRenderingException(DeltaTracker deltaTracker, Operation<Void> original) {
 		try {
-			original.call();
+			original.call(deltaTracker);
 		} catch (Exception e) {
 			long now = System.currentTimeMillis();
 			if (now - neruina$lastRenderErrorTime > ERROR_WINDOW_MS) {
