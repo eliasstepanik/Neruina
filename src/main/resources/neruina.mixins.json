@@ -6,5 +6,30 @@
   "minVersion": "0.8",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "accessor.LevelChunkAccessor",
+    "catchers.InventoryMixin",
+    "catchers.LevelChunkMixin",
+    "catchers.LevelChunkMixin$BoundTickingBlockEntityMixin",
+    "catchers.LevelMixin",
+    "catchers.LevelRendererMixin",
+    "catchers.ServerGamePacketListenerImplMixin",
+    "catchers.ServerLevelMixin",
+    "CommandManagerMixin",
+    "compat.BlockStateBaseMixin",
+    "compat.doespotatotick.LevelMixin",
+    "compat.itshallnottick.LevelMixin",
+    "compat.noseenotick.LevelMixin",
+    "CrashReportCategoryMixin",
+    "errorable.BlockEntityMixin",
+    "errorable.EntityMixin",
+    "errorable.ItemStackMixin",
+    "MinecraftServerMixin",
+    "PlayerListMixin",
+    "test.CampfireBlockEntityMixin",
+    "test.CompassItemMixin",
+    "test.FarmBlockMixin",
+    "test.ZombieMixin"
+  ]
 }
